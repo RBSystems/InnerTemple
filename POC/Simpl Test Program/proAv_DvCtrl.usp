@@ -1,0 +1,181 @@
+/*******************************************************************************************
+Dealer Name:	ProAV
+System Name:	dvCtrl
+System Number:	
+Programmer:		SPM		
+*******************************************************************************************/
+
+#HELP_BEGIN
+Version: 	v1_0
+Programmer: SPM
+Comments:	Initial Release
+
+Intructions:
+This module is used to manage the power and input control for devices (eg. tv, avr, etc). It has a max of
+10 inputs (can be changed in the code) and a progress range of 0-100 (ie. use this range on the gauge).
+      
+// Inputs
+
+Digital:
+PowerOn 						- Power on device
+PowerOff						- Power off device
+Input[n]						- Select device input. Also switches on power if device is off. Max = 10                                                       	
+
+      
+// Outputs
+
+Digital:
+PowerOnOut						- Power on signal to be linked with device power on command 
+PowerOffOut						- Power off signal to be linked with device power of command 
+InputOut[n]						- Power on signal to be linked with device power on command. Max = 10
+progressFb						- digital indication that progress is busy. Can be tied to a popup.
+
+Analog:
+progress#						- Value from 0-100 to show progress from when device is powered up to 
+								  when it is ready to accept commands. 
+
+#HELP_END
+
+
+/*******************************************************************************************
+  Compiler Directives
+*******************************************************************************************/
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #CATEGORY "" 
+#DEFAULT_VOLATILE
+#digital_expand InputsWithOutputs
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+#HELP_BEGIN
+   (add additional lines of help lines)
+#HELP_END
+
+
+/*******************************************************************************************
+  Include Libraries
+*******************************************************************************************/
+
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+*******************************************************************************************/
+   
+// Inputs                     
+digital_input _skip_, PowerOn, PowerOff, _skip_, resetProgress, _skip_, Input[10];                        
+   
+// Outputs
+digital_output _skip_, PowerOnOut, PowerOffOut,  _skip_, progressFb, _skip_, InputOut[10];
+
+analog_output _skip_, progress#;
+                        
+/*******************************************************************************************
+  SOCKETS
+*******************************************************************************************/
+
+/*******************************************************************************************
+  Parameters
+*******************************************************************************************/
+                       
+integer_parameter pwrDelay;                       
+                       
+#begin_parameter_properties pwrDelay
+
+propValidUnits 		= unitDecimal;
+propDefaultUnit 	= unitDecimal;
+propDefaultValue 	= 3d;
+
+#end_parameter_properties 
+           
+/*******************************************************************************************
+  Parameter Properties
+*******************************************************************************************/
+
+/*******************************************************************************************
+  Structure Definitions
+*******************************************************************************************/
+
+/*******************************************************************************************
+  Global Variables
+*******************************************************************************************/
+      
+integer pwr, counter;      
+      
+/*******************************************************************************************
+  Functions
+*******************************************************************************************/
+function progressReset()
+{
+	progress# = 0;
+	progressFb = 0;
+}       
+
+function progressStart()
+{
+	integer increment;
+
+	progressFb = 1; 
+
+	while( (progress# <= 99) && (progressFb = 1) )
+	{
+		increment = 100/pwrDelay;
+		progress# = progress# + increment;
+		
+		if(progress# >= 100)
+		{
+			progressReset();
+			break;
+		}
+
+		delay(100);
+	}
+} 
+       
+/*******************************************************************************************
+  Event Handlers
+*******************************************************************************************/
+push PowerOn
+{
+	pulse(50, PowerOnOut);
+	pwr = 1;
+	progressStart();
+}                        
+
+push PowerOff
+{
+	pulse(50, PowerOffOut);
+	pwr = 0;
+	progressReset();
+}      
+
+push Input
+{
+	if(pwr)
+	{
+		pulse(50, InputOut[getLastModifiedArrayIndex()]);
+	}
+	if(pwr = 0)
+	{  		        
+		pulse(50, PowerOnOut);
+		progressStart();
+		pwr = 1;		
+		pulse(50, InputOut[getLastModifiedArrayIndex()]);
+	}
+}    
+
+push resetProgress
+{
+	progressReset();
+} 
+
+/*******************************************************************************************
+  Main()
+*******************************************************************************************/
+
+Function Main()
+{
+    
+}
+
+

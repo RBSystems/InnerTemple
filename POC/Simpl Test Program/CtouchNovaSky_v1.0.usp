@@ -1,0 +1,546 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name:	proAV
+System Name:
+System Number:
+Programmer:		Mark Allen
+Comments:
+*/
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#PRINT_TO_TRACE
+//#INCLUDEPATH "C:\Users\mark.allen\Documents\GitHub\ctouchNovaSky\ctouchNovaSky\bin\Debug" 
+#USER_SIMPLSHARP_LIBRARY "ctouchNovaSky"
+
+DIGITAL_INPUT  		PowerOn,
+					PowerOff,
+					_skip_,
+					HDMI1,
+					HDMI2,
+					HDMI3,
+					HDMI4,
+					Dp,
+					VGA,
+					InsidePC,
+					Home,
+					_skip_,
+					MuteOn,
+					MuteOff,
+					_skip_,
+					KeyLockOn,
+					KeyLockOff,
+					_skip_,
+					BackLightOn,
+					BackLightOff,
+					_skip_,
+					PictureModeDynamic,
+					PictureModeStandard,
+					PictureModeSoft,
+					PictureModeUser,
+					PictureModeWriting,
+					SoundModeStandard,
+					SoundModeMusic,
+					SoundModeMovie,
+					SoundModeSport,
+					SoundModeUser,
+					_skip_,
+					FreezeControlOn,
+					FreezeControlOff,
+					SourceInfoShow,
+					SourceInfoHide,
+					Poll,
+					EnableDebug;
+
+ANALOG_INPUT 		_SKIP_,
+					VolumeLevel#;
+
+STRING_INPUT 		_SKIP_,
+					Rx$[100];
+
+DIGITAL_OUTPUT 		PowerOnFb,
+					PowerOffFb,
+					_skip_,
+					HDMI1Fb,
+					HDMI2Fb,
+					HDMI3Fb,
+					HDMI4Fb,
+					DpFb,
+					VGAFb,
+					InsidePCFb,
+					HomeFb,
+					_skip_,
+					MuteOnFb,
+					MuteOffFb,
+					_skip_,
+					KeyLockOnFb,
+					KeyLockOffFb,
+					_skip_,
+					BackLightOnFb,
+					BackLightOffFb,
+					_skip_,
+					PictureModeDynamicFb,
+					PictureModeStandardFb,
+					PictureModeSoftFb,
+					PictureModeUserFb,
+					PictureModeWritingFb,
+					SoundModeStandardFb,
+					SoundModeMusicFb,
+					SoundModeMovieFb,
+					SoundModeSportFb,
+					SoundModeUserFb,
+					_skip_,
+					FreezeControlOnFb,
+					FreezeControlOffFb,
+					SourceInfoShowFb,
+					SourceInfoHideFb,
+					_skip_,
+					_skip_;
+
+ANALOG_OUTPUT 		_SKIP_,
+					VolumeLevelFb#;
+
+STRING_OUTPUT 		_SKIP_,
+					Tx$;
+
+STRING_PARAMETER 	_SKIP_,
+					_SKIP_,
+                    _SKIP_,
+					_SKIP_,
+					_SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+ 					_SKIP_,
+					_SKIP_,
+					_SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+ 					_SKIP_,
+					_SKIP_,
+					_SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+ 					_SKIP_,
+					_SKIP_,
+					_SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+ 					_SKIP_,
+ 					_SKIP_,
+                    _SKIP_,
+                    _SKIP_,
+					DeviceId[5];
+
+#BEGIN_PARAMETER_PROPERTIES DeviceId
+   propDefaultValue = "01";  
+#END_PARAMETER_PROPERTIES
+
+ 
+Ctouch ctouchDisplay;
+
+
+PUSH PowerOn
+{
+	Print("Power On pressed");
+    ctouchDisplay.PowerOn();
+}
+
+PUSH PowerOff
+{
+	Print("Power Off pressed");
+
+    ctouchDisplay.PowerOff();
+}
+
+PUSH HDMI1
+{
+	Print("HDMI 1 pressed");
+
+    ctouchDisplay.Hdmi1();
+}
+
+PUSH HDMI2
+{
+	Print("HDMI 2 pressed");
+
+    ctouchDisplay.Hdmi2();
+}
+
+PUSH HDMI3
+{
+    ctouchDisplay.Hdmi3();
+}
+
+PUSH HDMI4
+{
+    ctouchDisplay.Hdmi4();
+}
+
+PUSH Dp
+{
+    ctouchDisplay.Dp();
+}
+
+PUSH VGA
+{
+    ctouchDisplay.Vga1();
+}
+
+PUSH InsidePC
+{
+    ctouchDisplay.InsidePc();
+}
+
+PUSH Home
+{
+    ctouchDisplay.Home();
+}
+
+PUSH MuteOn
+{
+    ctouchDisplay.MuteOn();
+}
+
+PUSH MuteOff
+{
+    ctouchDisplay.MuteOff();
+}
+
+PUSH KeyLockOn
+{
+    ctouchDisplay.KeyLockOn();
+}
+
+PUSH KeyLockOff
+{
+    ctouchDisplay.KeyLockOff();
+}
+
+
+PUSH PictureModeDynamic
+{
+    ctouchDisplay.PictureModeDynamic();
+}
+
+PUSH PictureModeStandard
+{
+    ctouchDisplay.PictureModeStandard();
+}
+
+PUSH PictureModeSoft
+{
+    ctouchDisplay.PictureModeSoft();
+}
+
+PUSH PictureModeUser
+{
+    ctouchDisplay.PictureModeUser();
+}
+
+PUSH PictureModeWriting
+{
+    ctouchDisplay.PictureModeWriting();
+}
+
+PUSH SoundModeStandard
+{
+    ctouchDisplay.SoundModeStandard();
+}
+
+PUSH SoundModeMusic
+{
+    ctouchDisplay.SoundModeMusic();
+}
+
+PUSH SoundModeMovie
+{
+    ctouchDisplay.SoundModeMovie();
+}
+
+PUSH SoundModeSport
+{
+    ctouchDisplay.SoundModeSport();
+}
+
+PUSH SoundModeUser
+{
+    ctouchDisplay.SoundModeUser();
+}
+
+PUSH FreezeControlOn
+{
+    ctouchDisplay.FreezeControlOn();
+}
+PUSH FreezeControlOff
+{
+    ctouchDisplay.FreezeControlOff();
+}
+PUSH SourceInfoShow
+{
+    ctouchDisplay.SourceInfoOn();
+}
+PUSH SourceInfoHide
+{
+    ctouchDisplay.SourceInfoOff();
+}
+
+PUSH Poll
+{
+ 	ctouchDisplay.Poll();
+}
+
+PUSH EnableDebug
+{
+ 	ctouchDisplay.EnableDebug(1);
+}
+
+PUSH BackLightOn
+{
+    ctouchDisplay.BackLightOn();
+}
+
+PUSH BackLightOff
+{
+    ctouchDisplay.BackLightOff();
+}
+
+RELEASE EnableDebug
+{
+    ctouchDisplay.EnableDebug(0);
+}
+
+CHANGE VolumeLevel#
+{
+    ctouchDisplay.VolumeControl(VolumeLevel#);
+}
+
+CHANGE Rx$
+{
+    ctouchDisplay.DeviceRx(Rx$);
+}
+
+CallBack Integer_Function PowerUpdate(INTEGER value_)
+{
+        if(value_ = 0){
+			PowerOffFb = 1;
+			PowerOnFb = 0;
+		}
+		else if(value_ = 1){
+            PowerOffFb = 0;
+			PowerOnFb = 1;
+		}
+}
+
+CallBack Integer_Function BackLightUpdate(INTEGER value_)
+{
+        if(value_ = 0){
+			BackLightOffFb = 1;
+			BackLightOnFb = 0;
+		}
+		else if(value_ = 1){
+            BackLightOffFb = 0;
+			BackLightOnFb = 1;
+		}
+}
+
+CallBack Integer_Function VolumeUpdate(INTEGER value_)
+{
+        VolumeLevelFb# = value_;
+}
+
+CallBack Integer_Function MuteUpdate(INTEGER value_)
+{
+        if(value_ = 0){
+			MuteOffFb = 1;
+			MuteOnFb = 0;
+		}
+		else if(value_ = 1){
+            MuteOffFb = 0;
+			MuteOnFb = 1;
+		}
+}
+
+CallBack Integer_Function Hdmi1Update(INTEGER value_)
+{
+       HDMI1Fb = value_;
+}
+
+CallBack Integer_Function Hdmi2Update(INTEGER value_)
+{
+       HDMI2Fb = value_;
+}
+
+CallBack Integer_Function Hdmi3Update(INTEGER value_)
+{
+       HDMI3Fb = value_;
+}
+
+CallBack Integer_Function Hdmi4Update(INTEGER value_)
+{
+       HDMI4Fb = value_;
+}
+
+CallBack Integer_Function DpUpdate(INTEGER value_)
+{
+       DpFb = value_;
+}
+
+CallBack Integer_Function VgaUpdate(INTEGER value_)
+{
+       VGAFb = value_;
+}
+
+CallBack Integer_Function InsidePcUpdate(INTEGER value_)
+{
+       HDMI1Fb = value_;
+}
+
+CallBack Integer_Function HomeUpdate(INTEGER value_)
+{
+       InsidePCFb = value_;
+}
+
+CallBack Integer_Function KeyLockUpdate(INTEGER value_)
+{
+        if(value_ = 0){
+			KeyLockOffFb = 1;
+			KeyLockOnFb = 0;
+		}
+		else if(value_ = 1){
+            KeyLockOffFb = 0;
+			KeyLockOnFb = 1;
+		}           
+}
+
+CallBack Integer_Function PictureModeDynamicUpdate(INTEGER value_)
+{
+       PictureModeDynamicFb = value_;
+}
+
+CallBack Integer_Function PictureModeStandardUpdate(INTEGER value_)
+{
+       PictureModeStandardFb = value_;
+}
+
+CallBack Integer_Function PictureModeSoftUpdate(INTEGER value_)
+{
+       PictureModeSoftFb = value_;
+}
+
+CallBack Integer_Function PictureModeUserUpdate(INTEGER value_)
+{
+       PictureModeUserFb = value_;
+}
+
+CallBack Integer_Function PictureModeWritingUpdate(INTEGER value_)
+{
+       PictureModeWritingFb = value_;
+}
+
+CallBack Integer_Function SoundModeStandardUpdate(INTEGER value_)
+{
+       SoundModeStandardFb = value_;
+}
+
+CallBack Integer_Function SoundModeMusicUpdate(INTEGER value_)
+{
+       SoundModeMusicFb = value_;
+}
+
+CallBack Integer_Function SoundModeMovieUpdate(INTEGER value_)
+{
+       SoundModeMovieFb = value_;
+}
+
+CallBack Integer_Function SoundModeSportUpdate(INTEGER value_)
+{
+       SoundModeSportFb = value_;
+}
+
+CallBack Integer_Function SoundModeUserUpdate(INTEGER value_)
+{
+       SoundModeUserFb = value_;
+}
+ 
+CallBack Integer_Function FreezeControlUpdate(INTEGER value_)
+{
+        if(value_ = 0){
+			FreezeControlOffFb = 1;
+			FreezeControlOnFb = 0;
+		}
+		else if(value_ = 1){
+            FreezeControlOffFb = 0;
+			FreezeControlOnFb = 1;
+		}               
+}
+
+CallBack Integer_Function SourceInfoVisibilityUpdate(INTEGER value_)
+{
+        if(value_ = 0){
+			SourceInfoHideFb = 1;
+			SourceInfoShowFb = 0;
+		}
+		else if(value_ = 1){
+            SourceInfoHideFb = 0;
+			SourceInfoShowFb = 1;
+		} 
+}
+
+CallBack string_function TxDataUpdate(String dataTx_)
+{
+		Tx$ = dataTx_;
+}
+
+
+Function Main()
+{
+    WaitForInitializationComplete();
+	ctouchDisplay.Initialise(DeviceId);
+	RegisterDelegate(ctouchDisplay, PowerFb, PowerUpdate);
+	RegisterDelegate(ctouchDisplay, BackLightFb, BackLightUpdate);
+	RegisterDelegate(ctouchDisplay, VolumeLevelFb, VolumeUpdate);
+	RegisterDelegate(ctouchDisplay, MuteFb, MuteUpdate);
+	RegisterDelegate(ctouchDisplay, Hdmi1Fb, Hdmi1Update);
+	RegisterDelegate(ctouchDisplay, Hdmi2Fb, Hdmi2Update);
+	RegisterDelegate(ctouchDisplay, Hdmi3Fb, Hdmi3Update);
+	RegisterDelegate(ctouchDisplay, Hdmi4Fb, Hdmi4Update);
+	RegisterDelegate(ctouchDisplay, DpFb, DpUpdate);
+	RegisterDelegate(ctouchDisplay, Vga1Fb, VgaUpdate);
+	RegisterDelegate(ctouchDisplay, InsidePcFb, InsidePcUpdate);
+	RegisterDelegate(ctouchDisplay, HomeFb, HomeUpdate);
+	RegisterDelegate(ctouchDisplay, KeyLockFb, KeyLockUpdate);
+	RegisterDelegate(ctouchDisplay, PictureModeDynamicFb, PictureModeDynamicUpdate);
+	RegisterDelegate(ctouchDisplay, PictureModeStandardFb, PictureModeStandardUpdate);
+	RegisterDelegate(ctouchDisplay, PictureModeSoftFb, PictureModeSoftUpdate);
+	RegisterDelegate(ctouchDisplay, PictureModeUserFb, PictureModeUserUpdate);
+	RegisterDelegate(ctouchDisplay, PictureModeWritingFb, PictureModeWritingUpdate);
+	RegisterDelegate(ctouchDisplay, SoundModeStandardFb, SoundModeStandardUpdate);
+	RegisterDelegate(ctouchDisplay, SoundModeMusicFb, SoundModeMusicUpdate);
+	RegisterDelegate(ctouchDisplay, SoundModeMovieFb, SoundModeMovieUpdate);
+	RegisterDelegate(ctouchDisplay, SoundModeSportFb, SoundModeSportUpdate);
+	RegisterDelegate(ctouchDisplay, SoundModeUserFb, SoundModeUserUpdate);
+	RegisterDelegate(ctouchDisplay, FreezeControlFb, FreezeControlUpdate);
+	RegisterDelegate(ctouchDisplay, SourceInfoVisibleFb, SourceInfoVisibilityUpdate);
+	RegisterDelegate(ctouchDisplay, DeviceTx, TxDataUpdate);
+}
+
+                                   
