@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='ISO-8859-1' ?>
 <File Type='Manifest' Version='6.1.0' ObjectDisplayList='4'>
-<Project FileName='InnerTemplePOC_CrestronApp.zip' Size='6033645' Build='20200701155333'>
+<Project FileName='InnerTemplePOC_CrestronApp.zip' Size='6067259' Build='20200702114545'>
 <Sources>
-<Source FileName='InnerTemplePOC_CrestronApp.xml' Size='538' Type='Application' Build='20200701155333' MinimumSGVersion='2.11.05.00' />
+<Source FileName='InnerTemplePOC_CrestronApp.xml' Size='538' Type='Application' Build='20200702114545' MinimumSGVersion='2.11.05.00' />
 </Sources>
 </Project>
 </File>
