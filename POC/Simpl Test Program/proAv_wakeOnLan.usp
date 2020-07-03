@@ -1,0 +1,82 @@
+/*
+Programmer: Ryan Blajda
+*/
+
+/**Compiler Directives**/
+
+// #ENABLE_DYNAMIC
+#SYMBOL_NAME "ProAv WOL Magic Packet Module"
+#HINT "Wake On Lan for PCs"
+// #DEFINE_CONSTANT
+#CATEGORY "4" // Device Interface
+// #PRINT_TO_TRACE
+// #DIGITAL_EXPAND 
+// #ANALOG_SERIAL_EXPAND 
+// #OUTPUT_SHIFT 
+// #HELP_PDF_FILE ""
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+// #ENCODING_ASCII
+// #ENCODING_UTF16
+// #ENCODING_INHERIT_FROM_PARENT
+// #ENCODING_INHERIT_FROM_PROGRAM
+
+#HELP_BEGIN
+	sendWOLPacket: sends the string to the toDevice output (you can also use the same signal name here to activate the UDP Enable)
+	toDevice: hook this up to the TX$ line of a UDP Communication symbol
+	AddressByte 1-6: Insert the Mac Address Bytes in Hex (\x_ _) in these fields
+#HELP_END
+
+
+/**Inputs and Outputs**/
+DIGITAL_INPUT sendWOLPacket;
+
+string magicPacket[110];
+
+STRING_OUTPUT toDevice;
+
+STRING_PARAMETER _SKIP_;             
+STRING_PARAMETER AddressByte1[1];
+STRING_PARAMETER AddressByte2[1];
+STRING_PARAMETER AddressByte3[1];
+STRING_PARAMETER AddressByte4[1];
+STRING_PARAMETER AddressByte5[1];
+STRING_PARAMETER AddressByte6[1];
+
+#BEGIN_PARAMETER_PROPERTIES AddressByte1, AddressByte2, AddressByte3, AddressByte4, AddressByte5, AddressByte6
+   propValidUnits=unitString;
+   propDefaultUnit=unitString;
+   propShortDescription= "Mac Address";
+#END_PARAMETER_PROPERTIES
+
+/**Event Handlers**/
+
+PUSH sendWOLPacket {
+	toDevice = magicPacket; //send out the magicPacket
+}
+
+RELEASE sendWOLPacket {
+	delay(50);
+	toDevice = ""; //clear out the toDevice variable
+}
+
+function Main() {
+   	string header[6];
+	string macAddress[6];
+	string summedmacAddress[100];
+	integer i;
+	magicPacket = "";
+	summedmacAddress = "";
+
+	header = CHR(0xFF)+ CHR(0xFF)+ CHR(0xFF)+ CHR(0xFF)+ CHR(0xFF)+ CHR(0xFF); //WOL Packet Header
+	
+	macAddress = AddressByte1 + AddressByte2 + AddressByte3 + AddressByte4 + AddressByte5 + AddressByte6; 
+	//concatenate the mac address bytes
+	
+	for (i = 1 to 16) {
+		summedmacAddress = summedmacAddress + macAddress; //create 16 copies of the mac address
+	}
+
+	magicPacket = header + summedmacAddress; //create the final magic packet
+}
